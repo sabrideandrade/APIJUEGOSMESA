@@ -36,3 +36,29 @@ router.post('/juegos', (req, res) => {
     coleccion.push(nuevoJuego);
     res.status(201).json(nuevoJuego);
 });
+
+///// actualizacion de los datos de los juegos
+
+router.put('/juegos/:id', (req, res) => {
+    const indice = coleccion.findIndex(j => j.id === parseInt(req.params.id));
+    if (indice !== -1) {
+        coleccion[indice] = { id: parseInt(req.params.id), ...req.body };
+        res.status(200).json(coleccion[indice]);
+    } else {
+        res.status(404).json({ mensaje: "No existe para actualizar" });
+    }
+});
+
+
+///////////// retirar juegosdel catalogo
+router.delete('/juegos/:id', (req, res) => {
+    const indice = coleccion.findIndex(j => j.id === parseInt(req.params.id));
+    if (indice !== -1) {
+        coleccion.splice(indice, 1);
+        res.status(200).json({ mensaje: "Juego retirado del catalogo" });
+    } else {
+        res.status(404).json({ mensaje: "ID no encontrado" });
+    }
+});
+
+module.exports = router;
