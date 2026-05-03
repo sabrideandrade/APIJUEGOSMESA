@@ -13,7 +13,7 @@ let coleccion = [
         estado: "En perfectas condiciones" 
     }
 ];
-
+/////consultar el catalogo con get para que genere cada una de las rutas
 router.get('/juegos', (req, res) => {
     res.status(200).json(coleccion);
 });
@@ -28,6 +28,7 @@ router.get('/juegos/:id', (req, res) => {
     }
 });
 
+/////para crer nuevos juegos en el catalogo y recibir datos del JSON use post
 router.post('/juegos', (req, res) => {
     const nuevoJuego = {
         id: coleccion.length + 1,
